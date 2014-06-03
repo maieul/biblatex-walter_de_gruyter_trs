@@ -13,7 +13,7 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 
 
-\ProvidesFile{walter_de_gruyter.dbx}
+\ProvidesFile{walter_de_gruyter_trs.dbx}
 
 \blx@inputonce{manuscripts-noautoshorthand.dbx}{}{}{}{}{}
 \blx@inputonce{manuscripts-shared.dbx}{}{}{}{}{}

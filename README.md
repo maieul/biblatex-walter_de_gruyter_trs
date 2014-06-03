@@ -1,4 +1,4 @@
-biblatex-walter_de_gruyter
+biblatex-walter_de_gruyter_trs
 ==========================
 
-Style biblatex pour Walter de Gruyter
+Style biblatex pour Walter de Gruyter (Theological and Religious Studies)
