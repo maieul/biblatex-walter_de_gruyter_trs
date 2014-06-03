@@ -27,6 +27,9 @@
 
 %% For articles
 
+\xpatchbibdriver{article}{\usebibmacro{in:}}{}{}{}
+\renewcommand{\bibpagespunct}{\addcolon\addspace}
+
 %% For books
 
 \xpatchbibdriver{book}{\printfield{volumes}}{\usebibmacro{volumes}}{}{}
