@@ -22,4 +22,13 @@
 
 \RequireBibliographyStyle{manuscripts-shared}
 \RequireBibliographyStyle{manuscripts-noautoshorthand}
+
+\defbibcheck{onlymvbook}{%check if the entry is a volume of a mvbook without own title
+	\ifentrytype{book}{%
+		\iffieldundef{maintitle}{}%
+			{\iffieldundef{title}{\skipentry}{}}%
+	}{}
+}
+
+
 \RequirePackage{xpatch}
