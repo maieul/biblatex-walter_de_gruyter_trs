@@ -23,10 +23,41 @@
 \RequireBibliographyStyle{manuscripts-shared}
 \RequireBibliographyStyle{manuscripts-noautoshorthand}
 
+% General
+
+%% Macros for reprint
+\renewbibmacro*{publisher+location+date}{%
+  \usebibmacro{origpublisher+origlocation+origdate}%
+  \printlist{location}%
+  \iflistundef{publisher}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printlist{publisher}%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit}
+
+\newbibmacro*{origpublisher+origlocation+origdate}{%
+  \printlist{origlocation}%
+  \iflistundef{origpublisher}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printlist{origpublisher}% 
+  \setunit*{\addcomma\space}%
+  \usebibmacro{origdate}%
+  \ifboolexpr{test {\iflistundef{origlocation}} and test {\iflistundef{origpublisher}} and test {\iffieldundef{origyear}}}{}%
+   	{\ifbibliography%
+		{\setunit*{\addperiod\space}}%
+		{\setunit*{\addsemicolon\space}}%
+		\bibstring{reprint}%
+	}
+}
+\newbibmacro*{origdate}{\printorigdate}
+
+% For Users
 \defbibcheck{onlymvbook}{%check if the entry is a volume of a mvbook without own title
 	\ifentrytype{book}{%
 		\iffieldundef{maintitle}{}%
 			{\iffieldundef{title}{\skipentry}{}}%
 	}{}
 }
-
