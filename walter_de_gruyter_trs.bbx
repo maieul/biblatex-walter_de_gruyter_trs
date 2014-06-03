@@ -25,13 +25,16 @@
 
 % General
 
+%% For articles
+
+%% For books
 
 \xpatchbibdriver{book}{\printfield{volumes}}{\usebibmacro{volumes}}{}{}
 
 \newbibmacro{volumes}{\iffieldundef{volumes}{}{\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}\printfield{volumes}}
 
 
-%% Macros for reprint
+%%% Macros for reprint
 \renewbibmacro*{publisher+location+date}{%
   \ifbibliography{}{\iffieldundef{volumes}{\nopunct\printtext{\addspace\bibopenparen}}{}}%
   \usebibmacro{origpublisher+origlocation+origdate}%
