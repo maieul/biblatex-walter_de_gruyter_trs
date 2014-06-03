@@ -25,6 +25,8 @@
 
 % General
 
+\renewcommand{\newunitpunct}{\ifbibliography{\adddot\addspace}{\addcomma\addspace}}
+
 %% For articles
 
 \xpatchbibdriver{article}{\usebibmacro{in:}}{}{}{}
