@@ -24,24 +24,25 @@
 \RequireBibliographyStyle{manuscripts-noautoshorthand}
 
 % General
-
+\renewcommand{\intitlepunct}{}
 \renewcommand{\newunitpunct}{\ifbibliography{\adddot\addspace}{\addcomma\addspace}}
 
 %% For articles
 
 \xpatchbibdriver{article}{\usebibmacro{in:}}{}{}{}
-\renewcommand{\bibpagespunct}{\addcolon\addspace}
+\renewcommand{\bibpagespunct}{\ifentrytype{article}{\addcolon\addspace}{\addcomma\addspace}}
 
 %% For books
 
-\xpatchbibdriver{book}{\printfield{volumes}}{\usebibmacro{volumes}}{}{}
 
-\newbibmacro{volumes}{\iffieldundef{volumes}{}{\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}\printfield{volumes}}
+\xpatchbibdriver{book}{\usebibmacro{maintitle+title}\newunit}{\usebibmacro{maintitle+title}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
+\xpatchbibdriver{inbook}{\usebibmacro{maintitle+booktitle}\newunit}{\usebibmacro{maintitle+booktitle}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
+\xpatchbibdriver{book}{\printfield{volumes}}{\usebibmacro{volumes}}{}{}
+\newbibmacro{volumes}{\ifbibliography{}{\setunit{}}\printfield{volumes}}
 
 
 %%% Macros for reprint
 \renewbibmacro*{publisher+location+date}{%
-  \ifbibliography{}{\iffieldundef{volumes}{\nopunct\printtext{\addspace\bibopenparen}}{}}%
   \usebibmacro{origpublisher+origlocation+origdate}%
   \printlist{location}%
   \iflistundef{publisher}
