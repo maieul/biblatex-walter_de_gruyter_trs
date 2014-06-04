@@ -40,10 +40,21 @@
 
 
 \xpatchbibdriver{book}{\usebibmacro{maintitle+title}\newunit}{\usebibmacro{maintitle+title}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
-\xpatchbibdriver{inbook}{\usebibmacro{maintitle+booktitle}\newunit}{\usebibmacro{maintitle+booktitle}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
 \xpatchbibdriver{book}{\printfield{volumes}}{\usebibmacro{volumes}}{}{}
 \newbibmacro{volumes}{\ifbibliography{}{\setunit{}}\printfield{volumes}}
 
+%% For inbooks
+
+\xpatchbibdriver{inbook}{\usebibmacro{maintitle+booktitle}\newunit}{\usebibmacro{maintitle+booktitle}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
+\xpatchbibdriver{inbook}{\usebibmacro{in:}}{\usebibmacro{pages+in}}{}{}
+\newbibmacro{pages+in}{%
+	\ifbibliography{\printfield{pages}}%
+	\printtext{%
+	  \addspace%
+      \bibstring{in}}%
+    \nopunct%
+}
+\xpatchbibdriver{inbook}{\usebibmacro{chapter+pages}}{\ifbibliography{}{\usebibmacro{chapter+pages}}}{}{}
 
 %%% Macros for reprint
 \renewbibmacro*{publisher+location+date}{%
