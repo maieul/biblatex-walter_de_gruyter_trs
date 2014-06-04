@@ -26,7 +26,8 @@
 % General
 \renewcommand{\intitlepunct}{}
 \renewcommand{\newunitpunct}{\ifbibliography{\adddot\addspace}{\addcomma\addspace}}
-
+\AtEveryCite{\def\abx@str{abx@sstr}}
+\AtBeginBibliography{\def\abx@str{abx@lstr}}
 %% Name
 
 
