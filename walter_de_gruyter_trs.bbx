@@ -42,7 +42,7 @@
 
 \xpatchbibdriver{book}{\usebibmacro{maintitle+title}\newunit}{\usebibmacro{maintitle+title}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
 \xpatchbibdriver{book}{\printfield{volumes}}{\usebibmacro{volumes}}{}{}
-\newbibmacro{volumes}{\ifbibliography{}{\setunit{}}\printfield{volumes}}
+\newbibmacro{volumes}{\ifbibliography{}{\iffieldundef{volume}{}{\setunit{}}\printfield{volumes}}}
 
 %% For inbooks
 
@@ -56,6 +56,7 @@
     \nopunct%
 }
 \xpatchbibdriver{inbook}{\usebibmacro{chapter+pages}}{\ifbibliography{}{\usebibmacro{chapter+pages}}}{}{}
+\xpatchbibdriver{inbook}{\printfield{volumes}}{}{}
 
 %%% Macros for reprint
 \renewbibmacro*{publisher+location+date}{%
