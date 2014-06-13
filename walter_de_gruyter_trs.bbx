@@ -44,8 +44,7 @@
   \printlist{language}%
   \newunit\newblock
   \usebibmacro{byauthor}%
-  \newunit\newblock
-   \printtext[parens]{\usebibmacro{byeditor+others}%
+   \nopunct\printtext[parens]{\usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit
@@ -96,8 +95,7 @@
   \usebibmacro{pages+in:}%
   \usebibmacro{bybookauthor}%
   \newunit\newblock
-  \usebibmacro{maintitle+booktitle}%
-  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}\nopunct%
   \printtext[parens]{\usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
