@@ -45,6 +45,7 @@
 \newbibmacro{volumes}{\ifbibliography{}{\iffieldundef{volume}{}{\setunit{}}\printfield{volumes}}}
 
 %% For inbooks
+\DeclareBibliographyAlias{inproceedings}{inbook}
 
 \xpatchbibdriver{inbook}{\usebibmacro{maintitle+booktitle}\newunit}{\usebibmacro{maintitle+booktitle}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
 \xpatchbibdriver{inbook}{\usebibmacro{in:}}{\usebibmacro{pages+in}}{}{}
