@@ -18,9 +18,7 @@
 
 
 \DeclareBibliographyStrings{%
-  pages={\ifboolexpr{test{\ifbibliography} and (test{\ifentrytype{inbook}{Pages}} or test {\ifentrytype{inproceedings}})}{Pages}{}}%
-		{\ifboolexpr{test{\ifbibliography} and (test{\ifentrytype{inbook}{Pages}} or test {\ifentrytype{inproceedings}})}{pp}{}}
-		,
+  pages={\ifboolexpr{test {\ifbibliography} and (test{\ifentrytype{inbook}} or test {\ifentrytype{inproceedings}})}{pages}{}}{\ifboolexpr{test {\ifbibliography} and (test{\ifentrytype{inbook}} or test {\ifentrytype{inproceedings}})}{pp}{}},
   page={}{}
 }
 
