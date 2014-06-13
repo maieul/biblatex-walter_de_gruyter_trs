@@ -28,8 +28,108 @@
 \renewcommand{\newunitpunct}{\ifbibliography{\adddot\addspace}{\addcomma\addspace}}
 \AtEveryCite{\def\abx@str{abx@sstr}}
 \AtBeginBibliography{\def\abx@str{abx@lstr}}
-%% Name
 
+\DeclareFieldFormat{parens}{\ifbibliography{#1}{\mkbibparens{#1}}}
+
+% Driver (just add parens)
+
+
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{maintitle+title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+   \printtext[parens]{\usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \usebibmacro{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{inbook}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{pages+in:}%
+  \usebibmacro{bybookauthor}%
+  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \printtext[parens]{\usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}}%
+  \newunit\newblock
+  \ifbibliography{}{\usebibmacro{chapter+pages}}{}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
 
 
 %% For articles
@@ -37,27 +137,28 @@
 \xpatchbibdriver{article}{\usebibmacro{in:}}{}{}{}
 \renewcommand{\bibpagespunct}{\ifentrytype{article}{\addcolon\addspace}{\addcomma\addspace}}
 
-%% For books
+%% Macro
 
 
-\xpatchbibdriver{book}{\usebibmacro{maintitle+title}\newunit}{\usebibmacro{maintitle+title}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
-\xpatchbibdriver{book}{\printfield{volumes}}{\usebibmacro{volumes}}{}{}
+
+
+
 \newbibmacro{volumes}{\ifbibliography{}{\iffieldundef{volume}{}{\setunit{}}\printfield{volumes}}}
 
 %% For inbooks
 \DeclareBibliographyAlias{inproceedings}{inbook}
 
-\xpatchbibdriver{inbook}{\usebibmacro{maintitle+booktitle}\newunit}{\usebibmacro{maintitle+booktitle}\ifbibliography{}{\nopunct\printtext{\addspace\bibopenparen}}}{}{}
-\xpatchbibdriver{inbook}{\usebibmacro{in:}}{\usebibmacro{pages+in}}{}{}
-\newbibmacro{pages+in}{%
+
+
+
+\newbibmacro{pages+in:}{%
 	\ifbibliography{\printfield{pages}}%
 	\printtext{%
 	  \addspace%
       \bibstring{in}}%
     \nopunct%
 }
-\xpatchbibdriver{inbook}{\usebibmacro{chapter+pages}}{\ifbibliography{}{\usebibmacro{chapter+pages}}}{}{}
-\xpatchbibdriver{inbook}{\printfield{volumes}}{}{}
+
 
 %%% Macros for reprint
 \renewbibmacro*{publisher+location+date}{%
@@ -69,7 +170,6 @@
   \printlist{publisher}%
   \setunit*{\addcomma\space}%
   \usebibmacro{date}%
-  \ifbibliography{}{\printtext{\bibcloseparen}}%
   \newunit}
 
 \newbibmacro*{origpublisher+origlocation+origdate}{%
