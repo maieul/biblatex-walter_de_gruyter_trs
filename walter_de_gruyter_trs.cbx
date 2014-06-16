@@ -17,3 +17,12 @@
 [\abx@cbxid]
 
 \RequireCitationStyle{verbose}
+
+\renewbibmacro*{cite:short}{%
+  \ifentrytype{manuscript}%
+  	{\usebibmacro{location+library+collection+shelfmark}}%
+	{\printnames{labelname}%
+  \setunit*{\nametitledelim}%
+  \printtext[bibhyperlink]{%
+    \printfield[citetitle]{labeltitle}}}%
+}
