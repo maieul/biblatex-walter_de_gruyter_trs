@@ -143,9 +143,9 @@
 
 \newbibmacro{volumes}{\ifbibliography{}{\iffieldundef{volume}{}{\setunit{}}\printfield{volumes}}}
 
-%% For inbooks
+%% For Pages
 \DeclareBibliographyAlias{inproceedings}{inbook}
-
+\DeclareFieldAlias{pagination}{bookpagination}
 
 \DeclareFieldFormat{withpages}{%
 	\def\withpages{withpages}%
@@ -161,7 +161,9 @@
     \nopunct%
 }
 
+% For manuscripts
 
+\renewbibmacro{manuscript:pages}{\printfield{pages}}
 %%% Macros for reprint
 \renewbibmacro*{publisher+location+date}{%
   \usebibmacro{origpublisher+origlocation+origdate}%
