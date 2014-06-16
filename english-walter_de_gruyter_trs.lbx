@@ -17,11 +17,14 @@
 \InheritBibliographyStrings{english-manuscripts}
 \InheritBibliographyExtras{english-manuscripts}
 
-
+\NewBibliographyString{withpages}
+\NewBibliographyString{withpagess}
 
 \DeclareBibliographyStrings{%
-  pages={\ifboolexpr{test {\ifbibliography} and (test{\ifentrytype{inbook}} or test {\ifentrytype{inproceedings}})}{pages}{}}{\ifboolexpr{test {\ifbibliography} and (test{\ifentrytype{inbook}} or test {\ifentrytype{inproceedings}})}{pp}{}},
-  page={}{}
+  pages={{}{}},
+  page={}{},
+  withpages={{Page}{p\adddot}},
+  withpagess={{Pages}{pp\adddot}}
 }
 
 

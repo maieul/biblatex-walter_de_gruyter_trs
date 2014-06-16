@@ -147,10 +147,14 @@
 \DeclareBibliographyAlias{inproceedings}{inbook}
 
 
-
+\DeclareFieldFormat{withpages}{%
+	\def\withpages{withpages}%
+	\iffieldequalstr{bookpagination}{page}{\restorefield{bookpagination}{\withpages}}{}%
+	\iffieldundef{bookpagination}{\restorefield{bookpagination}{\withpages}}{}%
+	\mkpageprefix[bookpagination]{#1}}
 
 \newbibmacro{pages+in:}{%
-	\ifbibliography{\printfield{pages}}%
+	\ifbibliography{\printfield[withpages]{pages}}%
 	\printtext{%
 	  \addspace%
       \bibstring{in}}%
