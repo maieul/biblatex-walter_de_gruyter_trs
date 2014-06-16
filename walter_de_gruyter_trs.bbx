@@ -31,7 +31,13 @@
 
 \DeclareFieldFormat{parens}{\ifbibliography{#1}{\mkbibparens{#1}}}
 
-% Driver (just add parens)
+% Pagination
+
+ \DeclareFieldFormat{postnote}{\ifboolexpr{(test {\ifbibliography} and (test{\ifentrytype{inbook}} or test {\ifentrytype{inproceedings}})) or not test  {\iffieldundef{pagination}}}{\mkpageprefix[pagination]{#1}}{#1}} 
+ 
+ \DeclareFieldFormat{pages}{\ifboolexpr{(test {\ifbibliography} and (test{\ifentrytype{inbook}} or test {\ifentrytype{inproceedings}})) or not test {\iffieldundef{pagination}}}{\mkpageprefix[pagination]{#1}}{#1}}
+
+% Driver
 
 
 \DeclareBibliographyDriver{book}{%
