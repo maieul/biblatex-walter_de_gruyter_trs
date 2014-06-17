@@ -31,7 +31,7 @@
 \AtEveryCite{\def\abx@str{abx@sstr}}
 \AtBeginBibliography{\def\abx@str{abx@lstr}}
 
-\DeclareFieldFormat{parens}{\ifbibliography{#1}{\mkbibparens{#1}}}
+\DeclareFieldFormat{condparens}{\ifbibliography{#1}{\mkbibparens{#1}}}
 
 % Driver (just add parens)
 
@@ -46,7 +46,7 @@
   \printlist{language}%
   \newunit\newblock
   \usebibmacro{byauthor}%
-   \nopunct\printtext[parens]{\usebibmacro{byeditor+others}%
+   \nopunct\printtext[condparens]{\usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit
@@ -98,7 +98,7 @@
   \usebibmacro{bybookauthor}%
   \newunit\newblock
   \usebibmacro{maintitle+booktitle}\nopunct%
-  \printtext[parens]{\usebibmacro{byeditor+others}%
+  \printtext[condparens]{\usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit
