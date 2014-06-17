@@ -131,11 +131,44 @@
     {}%
   \usebibmacro{finentry}}
 
+\DeclareBibliographyDriver{inarticle}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \iffieldundef{author}{}{\setunit{\labelnamepunct}\newblock}%
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{pages+in:}%
+  \usebibmacro{bybookauthor}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{maintitle}%
+  \newunit\newblock
+  \usebibmacro{journal+issuetitle}%
+  \newunit
+  \usebibmacro{byeditor+others}%
+  \newunit
+  \ifbibliography{}{\usebibmacro{note+pages}}{}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{issn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
 
 %% For articles
 
 \xpatchbibdriver{article}{\usebibmacro{in:}}{}{}{}
-\renewcommand{\bibpagespunct}{\ifentrytype{article}{\addcolon\addspace}{\addcomma\addspace}}
+\renewcommand{\bibpagespunct}{\ifboolexpr{test {\ifentrytype{article}} or test{\ifentrytype{bookinarticle}} or test{\ifentrytype{inarticle}}}{\addcolon\addspace}{\addcomma\addspace}}
+
 
 %% Macro
 
